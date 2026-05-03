@@ -1,0 +1,9 @@
+{
+    "name": "KESS",
+    "version": "1.0.0",
+    "title": "Kinetic Energy Storage System (KESS)",
+    "author": "Gemini CLI",
+    "factorio_version": "2.0",
+    "dependencies": ["base >= 2.0.0", "space-age >= 2.0.0"],
+    "description": "Introduces a high-capacity kinetic energy storage system (flywheel) with 10GJ capacity and 100MW I/O."
+}

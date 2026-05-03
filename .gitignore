@@ -1,0 +1,8 @@
+# Common junk
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Factorio mod specific (if any)
+# Usually mods are self-contained, but good to have
