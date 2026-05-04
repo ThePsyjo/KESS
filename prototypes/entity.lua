@@ -1,6 +1,32 @@
 -- Kinetic Energy Storage System (KESS) Entity Definition
 -- A high-capacity late-game accumulator for massive energy storage.
 
+-- Proxy for passive energy loss (Drain)
+data:extend({
+    {
+        type = "electric-energy-interface",
+        name = "kess-drain-proxy",
+        localised_name = {"entity-name.kess-drain-proxy"},
+        icon = "__KESS__/graphics/entity/kess-entity.png",
+        icon_size = 845,
+        flags = {"not-on-map", "placeable-off-grid", "not-blueprintable", "hide-alt-info", "no-copy-paste", "not-selectable-in-game"},
+        collision_mask = {layers = {}}, -- No collision
+        collision_box = {{-1.4, -1.4}, {1.4, 1.4}}, -- 3x3 tiles footprint
+        selection_box = nil,
+        selectable_in_game = false,
+        energy_source = {
+            type = "electric",
+            usage_priority = "secondary-input", -- Drains at the same priority as battery charging
+            buffer_capacity = "1MJ", -- Sufficient buffer to ensure full drain every tick
+            render_no_power_icon = false,
+        },
+        energy_usage = "13.89kW", -- Default (0.5%), dynamically updated in data.lua
+        continuous_animation = false,
+        gui_category = "hidden"
+    }
+})
+
+-- Main Accumulator
 data:extend({
     {
         type = "accumulator",

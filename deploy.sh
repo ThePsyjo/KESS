@@ -6,9 +6,10 @@ set -e
 
 # Configuration
 MOD_NAME=$(jq -r .name info.json)
-MOD_VERSION=$(jq -r .version info.json)
+MOD_VERSION=${1-$(jq -r .version info.json)}
 ZIP_NAME="${MOD_NAME}_${MOD_VERSION}.zip"
 DIST_DIR="dist"
+REF="v${MOD_VERSION}"
 
 # Ensure API token is set
 if [ -z "$FACTORIO_MOD_PORTAL_TOKEN" ]; then
@@ -38,7 +39,18 @@ mkdir -p "$DIST_DIR"
 # Zip the mod (excluding development files)
 # We zip into a subfolder named MOD_NAME to match Factorio's expected structure
 rm -f "$DIST_DIR/$ZIP_NAME"
-git archive --format=zip --prefix="$MOD_NAME/" -o "$DIST_DIR/$ZIP_NAME" HEAD
+echo "git archive --format=zip --prefix=\"$MOD_NAME/\" -o \"$DIST_DIR/$ZIP_NAME\" \"${REF}\""
+git archive --format=zip --prefix="$MOD_NAME/" -o "$DIST_DIR/$ZIP_NAME" "${REF}"
+
+# Remove irrelevant files from the archive
+zip -d "$DIST_DIR/$ZIP_NAME" \
+    "$MOD_NAME/deploy.sh" \
+    "$MOD_NAME/GEMINI.md" \
+    "$MOD_NAME/TODO.md" \
+    "$MOD_NAME/token.sh" \
+    "$MOD_NAME/.gitignore" \
+    "$MOD_NAME/.gitattributes" \
+    2>/dev/null || true
 
 echo "Requesting upload URL for $MOD_NAME..."
 

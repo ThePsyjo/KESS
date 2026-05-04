@@ -10,6 +10,15 @@ A high-capacity late-game energy storage solution for Factorio 2.0 (Space Age). 
 - **Massive Capacity**: Stores up to **10 Gigajoules (GJ)** of energy.
 - **High Power Flow**: Supports **100 Megawatts (MW)** of input and output power.
 - **Full Circuit Support**: Seamlessly integrate with your power management systems.
+- **Configurable Energy Decay**: Simulates real-world mechanical friction and air resistance (self-discharge).
+
+## Energy Decay Mechanic
+
+To reflect the physical reality of flywheel storage, KESS units experience a gradual loss of energy over time (Internal Leak).
+
+- **Default Rate**: 0.5% of total capacity lost per hour.
+- **Shadow Drain**: Implemented using a high-performance "shadow proxy" system that ensures perfectly smooth power graphs and zero UPS impact.
+- **Configurable**: Both the feature toggle and the decay rate can be adjusted in the **Startup Mod Settings**.
 
 ## Crafting Requirements
 
