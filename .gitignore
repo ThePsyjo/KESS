@@ -6,3 +6,5 @@ Thumbs.db
 
 # Factorio mod specific (if any)
 # Usually mods are self-contained, but good to have
+dist/
+token.sh
